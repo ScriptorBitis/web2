@@ -1,3 +1,5 @@
+
+
 function createCat() {
     const cat = document.createElement("img");
 

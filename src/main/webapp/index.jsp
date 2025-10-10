@@ -1,3 +1,6 @@
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,11 +11,13 @@
 
 <body>
 <div class="main-content">
+
     <div id="coordinates" class="coordinates">
         <div id="coordinatesheader" class="coordinatesheader">Нажмите здесь, чтобы переместить</div>
         <form name="Rform" method="post" target="_self">
 
-
+            <p>Текущее время = <%= LocalDateTime.now()%>
+            </p>
             <div class="IzmX">Изменение X:</div>
             <label for="xi"></label>
             <input class="labelx" id="xi" name="x" maxlength="10" pattern="-?[0-9]*\.?[0-9]*" type="text" required
@@ -22,18 +27,17 @@
             <div class="IzmY">Изменение Y:</div>
             <p><label for="Y">
                 <select id="Y" name="y">
+                    <option value="-4">-4</option>
+                    <option value="-3">-3</option>
                     <option value="-2">-2</option>
-                    <option value="-1.5">-1.5</option>
                     <option value="-1">-1</option>
-                    <option value="-0.5">-0.5</option>
                     <option value="0">0</option>
-                    <option value="0.5">0.5</option>
                     <option value="1">1</option>
-                    <option value="1.5">1.5</option>
                     <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
                 </select>
             </label></p>
-
 
             <div class="radio-group">
                 <label><input type="radio" name="radioR" value="1" required> 1</label>
@@ -44,22 +48,30 @@
             </div>
         </form>
     </div>
-    <div class="canvas">
-        <canvas id="graphic" width="405" height="405"></canvas>
+    <div class="canvasAndDude">
+        <div class="canvas">
+            <canvas id="graphic" width="405" height="405"></canvas>
+        </div>
+        <div id="dude" class="dude">
+            <img src="resources/dude.png">
+        </div>
     </div>
+
     <div class="prikols">
         <script src="useless.js"></script>
         <button id="catButton" class="btn" onclick=createCat()>~Мявк!~ ฅ^◐ω◑^ฅ</button>
-
+        <button id="sendRequest" class="btn" onclick=sendReq()>Проверить попадание точки</button>
     </div>
+
+
     <div class="hitTable">
         <table class="table">
             <thead>
             <tr>
-                <th> X </th>
-                <th> Y </th>
-                <th> R </th>
-                <th> Время выполнения (мс) </th>
+                <th> X</th>
+                <th> Y</th>
+                <th> R</th>
+                <th> Время выполнения (мс)</th>
                 <th>Попадание??????</th>
             </tr>
             </thead>
@@ -70,5 +82,6 @@
 </div>
 
 <script src="graphics.js"></script>
+<script src="index.js"></script>
 </body>
 </html>

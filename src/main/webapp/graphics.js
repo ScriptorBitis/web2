@@ -72,10 +72,8 @@ function drawEvr() {
     ctx.stroke();
 }
 
-const myForm = document.forms['Rform'];
-for (let i = 0; i < myForm.radioR.length; i++) {
-    myForm.radioR[i].addEventListener('click', onclick);
-}
+document.querySelectorAll('input[type="radio"][name="radioR"]').forEach(radio =>
+    radio.addEventListener("click", onclick));
 
 document.getElementById("graphic").addEventListener('click', makePointByClick);
 
@@ -147,10 +145,14 @@ function onclick(e) {
 
 
     drawEvr();
-
-    for (index = 0; index < pointsX.length; ++index) {
-        makePoint(pointsX[index], pointsY[index]);
+    /*
+    if (pointsX.length > 0 && pointsY > 0) {
+        for (index = 0; index < pointsX.length; ++index) {
+            makePoint(pointsX[index], pointsY[index]);
+        }
     }
+    */
+
 }
 
 

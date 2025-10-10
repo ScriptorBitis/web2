@@ -93,4 +93,21 @@
 }
 
 
+.canvasAndDude {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.dude {
+  opacity: 0;
+  animation: ani 2.5s forwards;
+  display: none;
+}
+@keyframes ani {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+
+
 
