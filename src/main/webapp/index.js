@@ -2,7 +2,7 @@ console.log('Happy developing ✨')
 
 
 document.getElementById("xi")
-    .addEventListener("click", checkX);
+    .addEventListener("input", checkX);
 
 function checkX(e) {
     console.log("Началась проверка вот этого - >" + e.target.value);
@@ -37,9 +37,17 @@ function checkX(e) {
 }
 
 function getR() {
-    var rValue = document.querySelector('input[type="radio"][name="radioR"]').value;
-    console.log("Получаем r = " + rValue);
-    return rValue;
+    var rValue;
+    try {
+        rValue = document.querySelector('input[name="radioR"]:checked').value;
+        console.log("Получаем r = " + rValue);
+        return rValue;
+    } catch (err) {
+        rValue = '';
+        console.log("Получаем r = " + rValue);
+        return rValue;
+    }
+
 }
 
 function getY() {
@@ -58,11 +66,7 @@ function getX() {
 
 const dude = document.getElementById("dude");
 
-function checkThatEverythingIfFill() {
-    var x = getX();
-    var y = getY();
-    var r = getR();
-
+function checkThatEverythingIfFill(x, y, r) {
     const isEmpty = x === "" || y === "" || r === "" ||
         isNaN(x) || isNaN(y) || isNaN(r);
 
@@ -81,10 +85,10 @@ function sendReq() {
     var x = getX();
     var y = getY();
     var r = getR();
-    if (checkThatEverythingIfFill()) {
+    if (checkThatEverythingIfFill(x, y, r)) {
         const url = `check?x=${x}&y=${y}&r=${r}`
-        console.log("Текущий url : "+ url)
-        fetch(url).then(data =>data.text())
+        console.log("Текущий url : " + url)
+        fetch(url).then(data => data.text())
             .then(data => console.log(data));
     }
 

@@ -1,6 +1,7 @@
-package alfarius.goida;
+package alfarius.goida.servlets;
 
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,8 +27,11 @@ public class ControllerServlet extends HttpServlet {
 
 
         if (checkParams(x, y, r)) {
-            out.println("<h1>Hello, World!</h1>");
-            out.println("<p>" + x + y + r + "</p>");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("area-check");
+            request.setAttribute("x", x);
+            request.setAttribute("y", y);
+            request.setAttribute("r", r);
+            requestDispatcher.forward(request, response);
         } else {
             response.setStatus(400);
             out.println("<p>Smt wrong with params.Dude, please, stop crash my lab...</p>");
@@ -41,29 +45,22 @@ public class ControllerServlet extends HttpServlet {
         }
         try {
             double doubleX = Double.parseDouble(x);
-            int intY = Integer.parseInt(y);
-            double intR = Integer.parseInt(r);
-            if (doubleX < -3 || doubleX > 3) {
+            double doubleY = Double.parseDouble(y);
+            double doubleR = Double.parseDouble(r);
+            if (doubleX < -5 || doubleX > 5) {
                 return false;
             }
-            for (int k : yValues) {
-                if (k == intY) {
-                    break;
-                }
+            if (doubleY < -5 || doubleY > 5) {
                 return false;
             }
             for (int k : rValues) {
-                if (k == intR) {
-                    break;
+                if (doubleR == k) {
+                    return true;
                 }
-                return false;
             }
-
-
+            return false;
         } catch (Exception e) {
             return false;
         }
-
-        return true;
     }
 }

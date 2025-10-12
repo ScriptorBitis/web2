@@ -94,6 +94,10 @@ function makePoint(x, y) {
 }
 
 function makePointByClick(event) {
+    var curR = getR();
+    if (curR == '') {
+        return
+    }
     const rect = canvas.getBoundingClientRect();
     const centerX = 200;
     const centerY = 200;
@@ -102,6 +106,7 @@ function makePointByClick(event) {
     const x = (event.clientX - rect.left - centerX) / scale;
     const y = (centerY - (event.clientY - rect.top)) / scale;
 
+    sendReqGraph(x, y, r);
     makePoint(x, y);
 }
 
@@ -112,29 +117,29 @@ function onclick(e) {
     ctx.beginPath()
 
     //треугольник  в 2 четверти
-    ctx.moveTo(200 - 20 * r, 200);
+    ctx.moveTo(200 - 40 * r, 200);
 
-    ctx.lineTo(200, 200 - r * 20);
+    ctx.lineTo(200, 200 - r * 40);
     ctx.lineTo(200, 200)
-    ctx.lineTo(200 - 20 * r, 200)
+    ctx.lineTo(200 - 40 * r, 200)
 
     ctx.fillStyle = "#7bc8f6";
     ctx.fill()
-    //четверть круга  в 1 четверти
+    //четверть круга  в 3 четверти
     ctx.moveTo(200, 200);
 
 
-    ctx.arc(200, 200, r * 40, -Math.PI / 2, 0)
+    ctx.arc(200, 200, r * 40, Math.PI / 2, Math.PI)
     ctx.moveTo(200, 200);
-    ctx.moveTo(200, 200 + 40 * r)
+    ctx.moveTo(200, 200 - 40 * r)
     ctx.fill()
 
-    //прямоугольник 0.5 К 1 В 4  четверти
+    //квадрат 1 К 1 В 4 четверти
 
     ctx.lineTo(200, 200);
     ctx.lineTo(200 + r * 40, 200);
-    ctx.lineTo(200 + r * 40, 200 + r * 20);
-    ctx.lineTo(200, 200 + 20 * r)
+    ctx.lineTo(200 + r * 40, 200 + r * 40);
+    ctx.lineTo(200, 200 + 40 * r)
     ctx.fill()
 
 
@@ -152,6 +157,22 @@ function onclick(e) {
         }
     }
     */
+
+}
+
+
+
+
+function sendReqGraph(xFromClick, yFromClick, rFromClick) {
+    var x = xFromClick;
+    var y = yFromClick;
+    console.log("Получаем x = " + x);
+    console.log("Получаем y = " + y);
+    var r = rFromClick;
+    const url = `check?x=${x}&y=${y}&r=${r}`
+    console.log("Текущий url : " + url)
+    fetch(url).then(data => data.text())
+        .then(data => console.log(data));
 
 }
 
