@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class AreaCheckServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long start = System.currentTimeMillis();
-        PrintWriter out = response.getWriter();
+        //PrintWriter out = response.getWriter();
         String x = request.getParameter("x");
         String y = request.getParameter("y");
         String r = request.getParameter("r");
@@ -26,18 +26,24 @@ public class AreaCheckServlet extends HttpServlet {
 
         ServletContext servletContext = this.getServletContext();
 
-        out.println("<h1>Hello, World from area-check!</h1>");
-        out.println("<p>" + "goida" + x + y + r + "</p>");
+        //out.println("<h1>Hello, World from area-check!</h1>");
+        //out.println("<p>" + "goida" + x + y + r + "</p>");
         if (checkHit(x, y, r)) {
-            out.println("win!");
+            //out.println("win!");
             p.setHitStatus(true);
             p.setExecutionTime(System.currentTimeMillis() - start);
         } else {
-            out.println("lose!");
+            //out.println("lose!");
             p.setHitStatus(false);
             p.setExecutionTime(System.currentTimeMillis() - start);
         }
         savePoinInContext(p, servletContext);
+        ArrayList<Point> pointArr = (ArrayList<Point>) servletContext.getAttribute("points");
+//        for (Point p1 : pointArr) {
+//            out.println(p1);
+//        }
+        request.setAttribute("pointArr", pointArr);
+        servletContext.getRequestDispatcher("/table.jsp").forward(request,response);
     }
 
     private boolean checkHit(String x, String y, String r) {

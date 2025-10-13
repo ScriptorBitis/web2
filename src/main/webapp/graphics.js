@@ -172,7 +172,13 @@ function sendReqGraph(xFromClick, yFromClick, rFromClick) {
     const url = `check?x=${x}&y=${y}&r=${r}`
     console.log("Текущий url : " + url)
     fetch(url).then(data => data.text())
-        .then(data => console.log(data));
+        .then(data => {
+            var hitTable = document.getElementById("hit-table");
+            while (hitTable.rows.length > 0) {
+                hitTable.deleteRow(0);
+            }
+            hitTable.insertAdjacentHTML('afterbegin',data);
+        });
 
 }
 

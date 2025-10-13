@@ -21,6 +21,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api
     compileOnly("jakarta.servlet:jakarta.servlet-api:6.0.0")
+    // https://mvnrepository.com/artifact/javax.servlet/jstl
+    implementation("javax.servlet:jstl:1.2")
 
 }
 

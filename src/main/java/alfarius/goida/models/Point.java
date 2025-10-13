@@ -70,4 +70,15 @@ public class Point {
     public boolean isHitStatus() {
         return hitStatus;
     }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                ", r=" + r +
+                ", executionTime=" + executionTime +
+                ", hitStatus=" + hitStatus +
+                '}';
+    }
 }
