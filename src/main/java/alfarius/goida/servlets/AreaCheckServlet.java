@@ -17,7 +17,7 @@ import java.util.ArrayList;
 @WebServlet("/area-check")
 public class AreaCheckServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         //PrintWriter out = response.getWriter();
         String x = request.getParameter("x");
         String y = request.getParameter("y");
@@ -31,11 +31,11 @@ public class AreaCheckServlet extends HttpServlet {
         if (checkHit(x, y, r)) {
             //out.println("win!");
             p.setHitStatus(true);
-            p.setExecutionTime(System.currentTimeMillis() - start);
+            p.setExecutionTime(System.nanoTime() - start);
         } else {
             //out.println("lose!");
             p.setHitStatus(false);
-            p.setExecutionTime(System.currentTimeMillis() - start);
+            p.setExecutionTime(System.nanoTime() - start);
         }
         savePoinInContext(p, servletContext);
         ArrayList<Point> pointArr = (ArrayList<Point>) servletContext.getAttribute("points");
