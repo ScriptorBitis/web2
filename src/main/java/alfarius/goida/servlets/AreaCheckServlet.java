@@ -1,6 +1,7 @@
 package alfarius.goida.servlets;
 
 
+import alfarius.goida.models.Point;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,24 +10,34 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PipedInputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 @WebServlet("/area-check")
 public class AreaCheckServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        long start = System.currentTimeMillis();
         PrintWriter out = response.getWriter();
         String x = request.getParameter("x");
         String y = request.getParameter("y");
         String r = request.getParameter("r");
+        Point p = new Point(x, y, r);
+
+        ServletContext servletContext = this.getServletContext();
 
         out.println("<h1>Hello, World from area-check!</h1>");
         out.println("<p>" + "goida" + x + y + r + "</p>");
-        if (checkHit(x,y,r)) {
-
+        if (checkHit(x, y, r)) {
             out.println("win!");
+            p.setHitStatus(true);
+            p.setExecutionTime(System.currentTimeMillis() - start);
         } else {
             out.println("lose!");
+            p.setHitStatus(false);
+            p.setExecutionTime(System.currentTimeMillis() - start);
         }
+        savePoinInContext(p, servletContext);
     }
 
     private boolean checkHit(String x, String y, String r) {
@@ -53,5 +64,15 @@ public class AreaCheckServlet extends HttpServlet {
         return false;
     }
 
+    private void savePoinInContext(Point p, ServletContext sC) {
+        ArrayList<Point> pointArr = (ArrayList<Point>) sC.getAttribute("points");
+        if (pointArr != null) {
+            pointArr.add(p);
+        } else {
+            pointArr = new ArrayList<>();
+            sC.setAttribute("points", pointArr);
+            pointArr.add(p);
+        }
+    }
 
 }

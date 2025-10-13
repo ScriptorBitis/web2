@@ -2,6 +2,7 @@ package alfarius.goida.servlets;
 
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,7 +25,6 @@ public class ControllerServlet extends HttpServlet {
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-
 
         if (checkParams(x, y, r)) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("area-check");

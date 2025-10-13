@@ -106,7 +106,7 @@ function makePointByClick(event) {
     const x = (event.clientX - rect.left - centerX) / scale;
     const y = (centerY - (event.clientY - rect.top)) / scale;
 
-    sendReqGraph(x, y, r);
+    sendReqGraph(x, y, curR);
     makePoint(x, y);
 }
 
