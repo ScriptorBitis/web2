@@ -92,12 +92,32 @@ function sendReq() {
             .then(data => {
                 var hitTable = document.getElementById("hit-table");
                 while (hitTable.rows.length > 0) {
-                   hitTable.deleteRow(0);
+                    hitTable.deleteRow(0);
                 }
-                hitTable.insertAdjacentHTML('afterbegin',data);
+                hitTable.insertAdjacentHTML('afterbegin', data);
             });
     }
+}
 
+function sendReqOnLoad() {
+
+
+    const url = `data`
+    console.log("Текущий url : " + url)
+    fetch(url).then(data => data.text())
+        .then(data => {
+            var hitTable = document.getElementById("hit-table");
+            while (hitTable.rows.length > 0) {
+                hitTable.deleteRow(0);
+            }
+            hitTable.insertAdjacentHTML('afterbegin', data);
+        });
 
 }
+
+window.onload = function () {
+    sendReqOnLoad();
+}
+
+
 

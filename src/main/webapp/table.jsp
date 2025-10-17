@@ -1,4 +1,7 @@
-<%--
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="alfarius.goida.models.Point" %><%--
   Created by IntelliJ IDEA.
   User: Никита
   Date: 13.10.2025
@@ -7,7 +10,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="lib"%>
-
+<%
+    ArrayList<Point> pointArr = (ArrayList<Point>) request.getAttribute("pointArr");
+    Collections.reverse(pointArr);
+%>
 <lib:forEach items="${pointArr}" var="point">
     <tr>
         <th>${point.x}</th>
@@ -17,3 +23,6 @@
         <th>${point.hitStatus}</th>
     </tr>
 </lib:forEach>
+<%
+    Collections.reverse(pointArr);
+%>

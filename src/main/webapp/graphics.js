@@ -177,6 +177,7 @@ function sendReqGraph(xFromClick, yFromClick, rFromClick) {
             while (hitTable.rows.length > 0) {
                 hitTable.deleteRow(0);
             }
+
             hitTable.insertAdjacentHTML('afterbegin',data);
         });
 

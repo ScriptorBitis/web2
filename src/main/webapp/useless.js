@@ -14,6 +14,7 @@ function createCat() {
     let y = 5 ;
     let xVec = Math.random() * 3 + 1;
     let yVec = Math.random() * 3 + 1;
+    const dragWindow = document.getElementById("coordinates");
 
     function animateCat() {
         x += xVec;
@@ -28,8 +29,21 @@ function createCat() {
             //meoh();
         }
 
+
+        const rect = dragWindow.getBoundingClientRect();
+        if (x + cat.width > rect.left &&
+            x < rect.right &&
+            y + cat.height > rect.top &&
+            y < rect.bottom) {
+            xVec *= -1;
+            yVec *= -1;
+        }
+
+
+
+
         cat.style.top = y + "px";
-        cat.style.right = x + "px";
+        cat.style.left = x + "px";
 
         requestAnimationFrame(animateCat);
     }
