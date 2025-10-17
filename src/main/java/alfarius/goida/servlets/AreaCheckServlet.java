@@ -52,19 +52,19 @@ public class AreaCheckServlet extends HttpServlet {
         double dR = Double.parseDouble(r);
         double distance = (double) Math.sqrt(dX * dX + dY * dY);
 
-        if (dX == 0 && dY == 0 && dR > 0) {
+        if (dX == 0.0 && dY == 0.0 && dR > 0.0) {
             return true;
         }
         //квадрат в 4 ч
-        if (dX >= 0 && dY <= 0) {
+        if (dX >= 0 && dY <= 0.0) {
             return (dX <= dR) && (Math.abs(dY) <= dR);
         }
         //полукруг в 3 ч
-        if (dX <= 0 && dY <= 0) {
+        if (dX <= 0.0 && dY <= 0.0) {
             return distance <= dR;
         }
         //треуг в 2 ч
-        if (dX <= 0 && dY >= 0) {
+        if (dX <= 0.0 && dY >= 0.0) {
             return (dX <= dR) && (dY <= dR) && (dY <= dR + dX);
         }
         return false;

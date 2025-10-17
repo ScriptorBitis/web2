@@ -13,13 +13,20 @@
 
 <body>
 <div class="main-content">
+    <header>
+            <img src="resources/itmo-cs-logo.png">
+            Чайковский Никита Михайлович P3217 ВАР:1906
+        </header>
 
     <div id="coordinates" class="coordinates">
         <div id="coordinatesheader" class="coordinatesheader">Нажмите здесь, чтобы переместить</div>
         <form name="Rform" method="post" target="_self">
 
-            <p>Текущее время = <%= LocalDateTime.now()%>
+            <p>Дата загрузки страницы =
+                <%= java.time.LocalDateTime.now()
+                        .format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yy")) %>
             </p>
+
             <div class="IzmX">Изменение X:</div>
             <label for="xi"></label>
             <input class="labelx" id="xi" name="x" maxlength="10" pattern="-?[0-9]*\.?[0-9]*" type="text" required
@@ -73,8 +80,8 @@
                 <th> X</th>
                 <th> Y</th>
                 <th> R</th>
-                <th> Время выполнения (мс)</th>
-                <th>Попадание??????</th>
+                <th> Время выполнения (нс)</th>
+                <th>Попадание?</th>
             </tr>
             </thead>
             <tbody id="hit-table">

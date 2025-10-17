@@ -63,9 +63,10 @@
   width: 100%;
   border: none;
   margin-bottom: 20px;
+  border-bottom: 20px
 }
 .hitTable {
-  max-height: 300px;  /* или фиксированную высоту */
+  max-height: 250px;
   overflow-y: auto;
   display: block;
 }
@@ -113,6 +114,11 @@
   100% {opacity: 1;}
 }
 
+header {
+ background-color: #001524;
+ padding: 5px;
+ color: white;
+}
 
 
 
