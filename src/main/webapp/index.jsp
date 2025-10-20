@@ -1,5 +1,5 @@
 <%@ page import="java.time.LocalDateTime" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ page import="alfarius.goida.models.Point"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="lib"%>
 
@@ -85,15 +85,7 @@
             </tr>
             </thead>
             <tbody id="hit-table">
-            <lib:forEach items="${pointArr}" var="point">
-            <tr class="hit-row">
-                <th>${point.x}</th>
-                <th>${point.y}</th>
-                <th>${point.r}</th>
-                <th>${point.executionTime}</th>
-                <th>${point.hitStatus}</th>
-            </tr>
-            </lib:forEach>
+
             </tbody>
         </table>
     </div>
