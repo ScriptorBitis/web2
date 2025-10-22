@@ -85,7 +85,6 @@ function sendReq() {
     var x = getX();
     var y = getY();
     var r = getR();
-    makePoint(x, y)
     if (checkThatEverythingIfFill(x, y, r)) {
         const url = `check?x=${x}&y=${y}&r=${r}`
         console.log("Текущий url : " + url)
@@ -96,8 +95,11 @@ function sendReq() {
                     hitTable.deleteRow(0);
                 }
                 hitTable.insertAdjacentHTML('afterbegin', data);
+                makePointAfterResponse();
             });
+
     }
+
 }
 
 function sendReqOnLoad() {
@@ -111,11 +113,23 @@ function sendReqOnLoad() {
             }
             hitTable.insertAdjacentHTML('afterbegin', data);
         });
-
 }
 
 window.onload = function () {
     sendReqOnLoad();
+}
+
+function makePointAfterResponse() {
+    const firstRow = document.querySelector('#hit-table tr');
+    if (!firstRow) return;
+    const cells = firstRow.cells;
+
+    const x = parseFloat(cells[0].innerText);
+    const y = parseFloat(cells[1].innerText);
+    const r = parseInt(cells[2].innerText);
+    const hitStatus = cells[4].innerText.trim();
+    points.get(`${r}`).push([x, y, hitStatus]);
+    makePoint(x,y,r,hitStatus);
 }
 
 

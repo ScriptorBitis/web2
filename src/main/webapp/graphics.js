@@ -1,6 +1,11 @@
 const canvas = document.getElementById("graphic");
 const ctx = canvas.getContext("2d");
 
+var points = new Map();
+for (let i = 0; i <= 5; i++) {
+    points.set(`${i}`, []);
+}
+
 
 function drawEvr() {
     ctx.font = "bold 16px Arial";
@@ -77,7 +82,7 @@ document.querySelectorAll('input[type="radio"][name="radioR"]').forEach(radio =>
 
 document.getElementById("graphic").addEventListener('click', makePointByClick);
 
-function makePoint(x, y) {
+function makePoint(x, y, r, hitStatus) {
     const centerX = 200;
     const centerY = 200;
     const scale = 40;
@@ -85,12 +90,15 @@ function makePoint(x, y) {
     const pixelX = centerX + x * scale;
     const pixelY = centerY - y * scale;
 
-
     ctx.beginPath();
     ctx.arc(pixelX, pixelY, 4, 0, 2 * Math.PI);
-    ctx.fillStyle = "red";
+
+    if (hitStatus === "hit") {
+        ctx.fillStyle = "green";
+    } else {
+        ctx.fillStyle = "red";
+    }
     ctx.fill();
-    return;
 }
 
 function makePointByClick(event) {
@@ -107,7 +115,7 @@ function makePointByClick(event) {
     const y = (centerY - (event.clientY - rect.top)) / scale;
 
     sendReqGraph(x, y, curR);
-    makePoint(x, y);
+
 }
 
 function onclick(e) {
@@ -150,17 +158,22 @@ function onclick(e) {
 
 
     drawEvr();
-    /*
-    if (pointsX.length > 0 && pointsY > 0) {
-        for (index = 0; index < pointsX.length; ++index) {
-            makePoint(pointsX[index], pointsY[index]);
-        }
-    }
-    */
-
+    drawPointsWithNewR(r);
+    console.log("Все наши точки....");
+    console.log(points);
 }
 
 
+
+function drawPointsWithNewR(r) {
+    const xYPoints = points.get(`${r}`);
+    if (!xYPoints) return;
+
+    for (let i = 0; i < xYPoints.length; i++) {
+        const [x, y, hitStatus] = xYPoints[i];
+        makePoint(x, y, r, hitStatus);
+    }
+}
 
 
 function sendReqGraph(xFromClick, yFromClick, rFromClick) {
@@ -178,7 +191,8 @@ function sendReqGraph(xFromClick, yFromClick, rFromClick) {
                 hitTable.deleteRow(0);
             }
 
-            hitTable.insertAdjacentHTML('afterbegin',data);
+            hitTable.insertAdjacentHTML('afterbegin', data);
+            makePointAfterResponse();
         });
 
 }
