@@ -85,6 +85,7 @@ function sendReq() {
     var x = getX();
     var y = getY();
     var r = getR();
+    makePoint(x, y)
     if (checkThatEverythingIfFill(x, y, r)) {
         const url = `check?x=${x}&y=${y}&r=${r}`
         console.log("Текущий url : " + url)
@@ -100,8 +101,6 @@ function sendReq() {
 }
 
 function sendReqOnLoad() {
-
-
     const url = `data`
     console.log("Текущий url : " + url)
     fetch(url).then(data => data.text())

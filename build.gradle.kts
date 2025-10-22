@@ -1,4 +1,4 @@
-import org.gradle.internal.declarativedsl.parsing.main
+
 
 plugins {
     id("java")

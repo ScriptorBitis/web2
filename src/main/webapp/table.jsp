@@ -1,7 +1,8 @@
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="alfarius.goida.models.Point" %><%--
+<%@ page import="alfarius.goida.models.Point" %>
+<%--
   Created by IntelliJ IDEA.
   User: Никита
   Date: 13.10.2025
